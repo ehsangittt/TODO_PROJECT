@@ -1,0 +1,5 @@
+{% extends 'todos/main.html' %}
+{% block content %}
+<a href="{% url 'task-list' %}">Back</a>
+<form method="POST">{% csrf_token %}<p>Delete "{{task}}"?</p><button class="btn btn-danger">Confirm</button></form>
+{% endblock %}

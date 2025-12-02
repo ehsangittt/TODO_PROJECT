@@ -1,0 +1,21 @@
+{% extends 'todos/main.html' %}
+{% block content %}
+<div class="d-flex justify-content-between">
+    <h3>My Tasks ({{count}} incomplete)</h3>
+    <div>
+        <span>User: {{request.user}}</span>
+        <form action="{% url 'logout' %}" method="post" style="display:inline;">{% csrf_token %}<button class="btn btn-danger btn-sm">Logout</button></form>
+        <a href="{% url 'task-create' %}" class="btn btn-success btn-sm">Add Task</a>
+    </div>
+</div>
+<hr>
+<form method="GET"><input name="search-area" placeholder="Search..."><button>Search</button></form>
+<table class="table">
+{% for task in tasks %}
+<tr>
+    <td>{{task.title}}</td><td>{{task.status}}</td><td>{{task.priority}}</td>
+    <td><a href="{% url 'task-update' task.id %}">Edit</a> | <a href="{% url 'task-delete' task.id %}">Delete</a></td>
+</tr>
+{% endfor %}
+</table>
+{% endblock %}

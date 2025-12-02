@@ -1,0 +1,5 @@
+{% extends 'todos/main.html' %}
+{% block content %}
+<a href="{% url 'task-list' %}">Back</a>
+<form method="POST">{% csrf_token %}{{ form.as_p }}<button class="btn btn-success">Save</button></form>
+{% endblock %}
