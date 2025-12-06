@@ -68,7 +68,8 @@ class TaskUpdate(LoginRequiredMixin, UpdateView):
     fields = ['title', 'description', 'status', 'priority', 'due_date']
     success_url = reverse_lazy('task-list')
     template_name = 'todos/task_form.html'
-    def get_queryset(self): return Task.objects.filter(user=self.request.user)
+    def get_queryset(self): 
+        return self.model.objects.filter(user=self.request.user)
 
 class TaskDelete(LoginRequiredMixin, DeleteView):
     model = Task
