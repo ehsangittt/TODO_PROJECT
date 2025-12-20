@@ -1,6 +1,8 @@
-Django==4.2
-#django version
+Django>=4.0
 psycopg2-binary
-# python drive for postgreSQL  -bainary for easy installtion
 gunicorn
-# A WSGI HTTP server for python app    
+Pillow           # 👈 جدید: برای مدیریت فایل‌ها و تصاویر
+djangorestframework # 👈 جدید: برای ایجاد REST API
+Pillow
+python-dotenv
+

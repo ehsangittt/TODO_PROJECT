@@ -1,9 +1,22 @@
+# todos/models.py
 from django.db import models
 from django.contrib.auth.models import User
 
+# ----------------------------
+# مدل اصلی: Task
+# ----------------------------
 class Task(models.Model):
-    STATUS_CHOICES = [('TODO', 'To Do'), ('IN_PROGRESS', 'In Progress'), ('DONE', 'Done')]
-    PRIORITY_CHOICES = [('LOW', 'Low'), ('MEDIUM', 'Medium'), ('HIGH', 'High')]
+    STATUS_CHOICES = [
+        ('TODO', 'To Do'),
+        ('IN_PROGRESS', 'In Progress'),
+        ('DONE', 'Done')
+    ]
+
+    PRIORITY_CHOICES = [
+        ('LOW', 'Low'),
+        ('MEDIUM', 'Medium'),
+        ('HIGH', 'High')
+    ]
 
     user = models.ForeignKey(User, on_delete=models.CASCADE)
     title = models.CharField(max_length=200)
@@ -13,5 +26,21 @@ class Task(models.Model):
     due_date = models.DateField(null=True, blank=True)
     created_at = models.DateTimeField(auto_now_add=True)
 
+    # 👇 فیلد تصویر اختصاصی برای Task
+    image = models.ImageField(upload_to='task_images/', null=True, blank=True)
+
     def __str__(self):
         return self.title
+
+
+# ----------------------------
+# مدل ضمیمه‌ها: Attachment
+# هر Task می‌تواند چند فایل داشته باشد
+# ----------------------------
+class Attachment(models.Model):
+    task = models.ForeignKey(Task, on_delete=models.CASCADE, related_name='attachments')
+    file = models.FileField(upload_to='task_attachments/')
+    uploaded_at = models.DateTimeField(auto_now_add=True)
+
+    def __str__(self):
+        return f"Attachment for {self.task.title}"
