@@ -27,4 +27,4 @@ docker-compose up -d db
 ```bash
 
 docker-compose run web python manage.py createsuperuser
-```bash
+```
