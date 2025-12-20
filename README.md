@@ -13,6 +13,8 @@ To run the project, simply use Docker Compose:
 ```bash
 docker-compose up
 
+```
+
 
 To create a superuser, run the following commands:
 
@@ -20,6 +22,9 @@ To create a superuser, run the following commands:
 
 docker-compose up -d db
 
+```
+
 ```bash
 
 docker-compose run web python manage.py createsuperuser
+```bash
