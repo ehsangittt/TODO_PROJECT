@@ -44,9 +44,9 @@ class CustomLoginView(LoginView):
 # =========================
 
 def force_login(request):
-   
-    logout(request)
-    return redirect('login')
+    if not request.user.is_authenticated:
+        return redirect('login')
+    return redirect('task-list')
 
 
 # =========================
