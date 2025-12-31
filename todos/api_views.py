@@ -8,9 +8,7 @@ class TaskViewSet(viewsets.ModelViewSet):
     permission_classes = [permissions.IsAuthenticated] 
 
     def get_queryset(self):
-        # فقط تسک‌های خود کاربر را برمی‌گرداند
         return Task.objects.filter(user=self.request.user).order_by('-created_at')
 
     def perform_create(self, serializer):
-        # کاربر فعلی را به عنوان مالک ثبت می‌کند.
         serializer.save(user=self.request.user)

@@ -1,10 +1,6 @@
-# todos/models.py
 from django.db import models
 from django.contrib.auth.models import User
 
-# ----------------------------
-# مدل اصلی: Task
-# ----------------------------
 class Task(models.Model):
     STATUS_CHOICES = [
         ('TODO', 'To Do'),
@@ -26,17 +22,12 @@ class Task(models.Model):
     due_date = models.DateField(null=True, blank=True)
     created_at = models.DateTimeField(auto_now_add=True)
 
-    # 👇 فیلد تصویر اختصاصی برای Task
     image = models.ImageField(upload_to='task_images/', null=True, blank=True)
 
     def __str__(self):
         return self.title
 
 
-# ----------------------------
-# مدل ضمیمه‌ها: Attachment
-# هر Task می‌تواند چند فایل داشته باشد
-# ----------------------------
 class Attachment(models.Model):
     task = models.ForeignKey(Task, on_delete=models.CASCADE, related_name='attachments')
     file = models.FileField(upload_to='task_attachments/')

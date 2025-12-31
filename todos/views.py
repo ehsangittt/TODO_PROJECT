@@ -1,4 +1,3 @@
-# todos/views.py
 from django.shortcuts import render, redirect
 from django.views.generic import ListView, CreateView, UpdateView, DeleteView
 from django.contrib.auth.views import LoginView
@@ -9,10 +8,6 @@ from django.contrib.auth.mixins import LoginRequiredMixin
 from django.views import View
 from .models import Task
 
-
-# =========================
-# Register
-# =========================
 
 class RegisterView(View):
     def get(self, request):
@@ -27,9 +22,6 @@ class RegisterView(View):
         return render(request, 'todos/register.html', {'form': form})
 
 
-# =========================
-# Login (همیشه اجازه نمایش بده)
-# =========================
 
 class CustomLoginView(LoginView):
     template_name = 'todos/login.html'
@@ -39,9 +31,6 @@ class CustomLoginView(LoginView):
         return reverse_lazy('task-list')
 
 
-# =========================
-# Force Login (Logout → Login)
-# =========================
 
 def force_login(request):
     if not request.user.is_authenticated:
@@ -49,9 +38,7 @@ def force_login(request):
     return redirect('task-list')
 
 
-# =========================
-# Task List
-# =========================
+
 
 class TaskList(LoginRequiredMixin, ListView):
     model = Task
@@ -80,9 +67,6 @@ class TaskList(LoginRequiredMixin, ListView):
         return context
 
 
-# =========================
-# Create / Update / Delete
-# =========================
 
 class TaskCreate(LoginRequiredMixin, CreateView):
     model = Task

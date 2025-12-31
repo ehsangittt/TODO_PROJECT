@@ -2,23 +2,18 @@ from pathlib import Path
 import os
 from dotenv import load_dotenv
 
-# بارگذاری متغیرهای .env
 load_dotenv()
 
-# مسیر پایه پروژه
 BASE_DIR = Path(__file__).resolve().parent.parent
 
-# فایل‌های رسانه‌ای
 MEDIA_URL = '/media/'
 MEDIA_ROOT = BASE_DIR / 'media'
 
-# امنیت و debug
 SECRET_KEY = os.getenv('SECRET_KEY', 'insecure-key')  # مقدار پیش‌فرض فقط برای dev
 DEBUG = os.getenv('DEBUG', 'True') == 'True'
 
 ALLOWED_HOSTS = os.getenv('ALLOWED_HOSTS', '*').split(',')
 
-# برنامه‌ها
 INSTALLED_APPS = [
     'django.contrib.admin',
     'django.contrib.auth',
@@ -41,7 +36,6 @@ MIDDLEWARE = [
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
 ]
 
-# روتینگ
 ROOT_URLCONF = 'config.urls'
 
 TEMPLATES = [
@@ -62,7 +56,6 @@ TEMPLATES = [
 
 WSGI_APPLICATION = 'config.wsgi.application'
 
-# دیتابیس
 DATABASES = {
     'default': {
         'ENGINE': os.getenv('DB_ENGINE', 'django.db.backends.postgresql'),
@@ -74,20 +67,16 @@ DATABASES = {
     }
 }
 
-# اعتبارسنجی پسورد
 AUTH_PASSWORD_VALIDATORS = []
 
-# تنظیمات بین‌المللی
 LANGUAGE_CODE = 'en-us'
 TIME_ZONE = 'UTC'
 USE_I18N = True
 USE_TZ = True
 
-# استاتیک فایل‌ها
 STATIC_URL = 'static/'
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
-# مسیرهای ورود و خروج
 LOGIN_URL = 'login'
 LOGIN_REDIRECT_URL = 'task-list'
 LOGOUT_REDIRECT_URL = 'login'

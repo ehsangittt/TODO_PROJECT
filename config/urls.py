@@ -6,12 +6,10 @@ from django.conf.urls.static import static
 urlpatterns = [
     path('admin/', admin.site.urls),
 
-    # وب اپلیکیشن اصلی
     path('', include('todos.urls')),
 
   
 ]
 
-# برای دسترسی به فایل‌ها در حالت DEBUG
 if settings.DEBUG:
     urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

@@ -86,11 +86,17 @@
         <tr>
             <td>{{ task.title }}</td>
             <td>
-                {% if task.status == "DONE" %}
-                    <span class="badge bg-success">Completed</span>
+                {% if task.status|upper == "DONE" %}
+                    <span class="badge bg-success">DONE</span>
+                {% elif task.status|upper == "In PROGRESS" %}
+                    <span class="badge bg-primary">IN PROGRESS</span>
+                {% elif task.status|upper == "TODO" %}
+                    <span class="badge bg-info text-dark">TODO</span>
                 {% else %}
-                    <span class="badge bg-warning text-dark">Pending</span>
+                    <span class="badge bg-warning text-dark">IN PROGRESS</span>
+
                 {% endif %}
+
             </td>
             <td>{{ task.priority }}</td>
             <td>{{ task.due_date|default:"—" }}</td>
